@@ -1,0 +1,13 @@
+lane :test1 do
+  ram_disk(name: 'temp', size: 10, use: lambda {
+    puts 'do something such like call another action or lane'
+  })
+end
+
+lane :test2 do
+  create_ram_disk(name: 'temp2', size: 10)
+  mounted_path = Actions.lane_context[SharedValues::RAM_DISK_PATH]
+  remove_ram_disk # fetch the value from Actions.lane_context[SharedValues::RAM_DISK_PATH] by default
+  # or do this
+  # remove_ram_disk(path: Actions.lane_context[SharedValues::RAM_DISK_PATH])
+end
